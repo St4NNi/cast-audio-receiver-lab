@@ -60,6 +60,13 @@ class ReleaseRecordTests(unittest.TestCase):
                     )
                     self.assertRegex(record["source_commit"], r"^[0-9a-f]{40}$")
 
+    def test_current_frontend_patch_matches_source_lock(self):
+        record = json.loads((ROOT / "config/vibecast-frontend.lock.json").read_text())
+        patch = ROOT / record["local_patch"]
+        self.assertEqual(
+            hashlib.sha256(patch.read_bytes()).hexdigest(), record["local_patch_sha256"]
+        )
+
     def test_wheel_manifest_and_requirements_agree(self):
         manifests = sorted((ROOT / "config").glob("*.wheels.json"))
         self.assertTrue(manifests, "no wheel inventories")

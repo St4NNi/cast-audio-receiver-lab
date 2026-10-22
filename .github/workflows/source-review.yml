@@ -32,6 +32,7 @@ jobs:
           git clone --filter=blob:none "${pins[0]}" "$RUNNER_TEMP/frontend-git"
           mkdir "$RUNNER_TEMP/vibecast-sources"
           git -C "$RUNNER_TEMP/frontend-git" archive "${pins[1]}" | tar -x -C "$RUNNER_TEMP/vibecast-sources"
+          git -C "$RUNNER_TEMP/vibecast-sources" apply --unidiff-zero "$GITHUB_WORKSPACE/patches/vibecast-crl-refresh.patch"
           cp config/vibecast-frontend.lock.json "$RUNNER_TEMP/vibecast-sources/SOURCE-PIN.json"
           cp licenses/Chromium-BSD.txt "$RUNNER_TEMP/vibecast-sources/crates/vibecast-proto/proto/LICENSE"
           cp docs/build-vendored-vibecast.md "$RUNNER_TEMP/vibecast-sources/BUILD-SOURCE.md"

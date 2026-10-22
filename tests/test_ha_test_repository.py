@@ -19,6 +19,7 @@ class HomeAssistantTestRepositoryTests(unittest.TestCase):
                 'certificate_path: ""', config
             )
             self.assertTrue((app / "Dockerfile").is_file())
+            self.assertTrue((app / "patches/vibecast-crl-refresh.patch").is_file())
             self.assertTrue((app / "LICENSING.md").is_file())
             for name in ("icon.png", "logo.png", "README.md", "CHANGELOG.md"):
                 self.assertTrue((app / name).is_file(), name)

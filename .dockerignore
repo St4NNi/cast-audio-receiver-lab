@@ -8,4 +8,5 @@ dist
 **/target
 third_party
 research
-patches
+patches/*
+!patches/vibecast-crl-refresh.patch

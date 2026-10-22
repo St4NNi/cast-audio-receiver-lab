@@ -1,5 +1,12 @@
 # Changelog
 
+## Unreleased
+
+- Refresh Cast revocation data hourly without restarting speakers. Retain the
+  last downloaded list during network failures and across TLS certificate
+  rotation, and prefer current Google data over an embedded stale list.
+- Apply the same pinned frontend patch in container, CI and local HA builds.
+
 ## 0.6.0.dev26 — exclusive YouTube controllers and checked playback fallback
 
 - Restore exclusive YouTube Music sender takeover. A new active controller

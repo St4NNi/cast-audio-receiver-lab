@@ -26,6 +26,7 @@ FILES = (
     "tests/test_dlna_media.py",
     "config/container-build-cp312.lock.txt",
     "config/container-linux-x86_64-cp312.lock.txt",
+    "patches/vibecast-crl-refresh.patch",
 )
 
 

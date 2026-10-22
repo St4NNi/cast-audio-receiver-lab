@@ -11,6 +11,9 @@ RUN apt-get update \
 WORKDIR /src
 RUN git clone --filter=blob:none "${VIBECAST_REPOSITORY}" . \
     && git checkout --detach "${VIBECAST_COMMIT}"
+COPY patches/vibecast-crl-refresh.patch /tmp/vibecast-crl-refresh.patch
+RUN git apply --check --unidiff-zero /tmp/vibecast-crl-refresh.patch \
+    && git apply --unidiff-zero /tmp/vibecast-crl-refresh.patch
 RUN cargo build --locked --release -p vibecast-cli
 
 FROM python:3.12-slim-bookworm AS python-builder

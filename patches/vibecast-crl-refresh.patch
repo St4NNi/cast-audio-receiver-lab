@@ -1,0 +1,105 @@
+diff --git a/crates/vibecast-platform/src/lib.rs b/crates/vibecast-platform/src/lib.rs
+index b6c3abb..d4ac63b 100644
+--- a/crates/vibecast-platform/src/lib.rs
++++ b/crates/vibecast-platform/src/lib.rs
+@@ -264,2 +264,2 @@ pub async fn run(
+-    // Device-auth CRL: prefer the manifest's embedded CRL, else fetch from Google.
+-    let crl = resolve_crl(&http, bundle.crl.clone()).await;
++    // Device-auth CRL: fetch current data, retaining the manifest as an offline fallback.
++    let crl = resolve_crl(&http, bundle.crl.clone(), CRL_URL).await;
+@@ -639 +639 @@ fn build_http_client(config: &Config) -> Result<reqwest::Client, PlatformError>
+-/// Resolve the device-auth CRL: prefer the manifest's, else fetch from Google.
++/// Resolve the device-auth CRL, retaining previous data if the fetch fails.
+@@ -641,6 +641,6 @@ fn build_http_client(config: &Config) -> Result<reqwest::Client, PlatformError>
+-async fn resolve_crl(http: &reqwest::Client, manifest_crl: Option<Vec<u8>>) -> Option<Vec<u8>> {
+-    if let Some(crl) = manifest_crl {
+-        tracing::info!(bytes = crl.len(), "using CRL from manifest");
+-        return Some(crl);
+-    }
+-    match fetch_crl(http).await {
++async fn resolve_crl(
++    http: &reqwest::Client,
++    manifest_crl: Option<Vec<u8>>,
++    url: &str,
++) -> Option<Vec<u8>> {
++    match fetch_crl(http, url).await {
+@@ -652,2 +652,2 @@ async fn resolve_crl(http: &reqwest::Client, manifest_crl: Option<Vec<u8>>) -> O
+-            tracing::warn!(%error, "CRL fetch failed; continuing without a CRL");
+-            None
++            tracing::warn!(%error, "CRL fetch failed; retaining previous CRL");
++            manifest_crl
+@@ -658,2 +658,2 @@ async fn resolve_crl(http: &reqwest::Client, manifest_crl: Option<Vec<u8>>) -> O
+-async fn fetch_crl(http: &reqwest::Client) -> Result<Vec<u8>, reqwest::Error> {
+-    let response = http.get(CRL_URL).send().await?.error_for_status()?;
++async fn fetch_crl(http: &reqwest::Client, url: &str) -> Result<Vec<u8>, reqwest::Error> {
++    let response = http.get(url).send().await?.error_for_status()?;
+@@ -683,0 +684,37 @@ mod tests {
++    #[tokio::test]
++    async fn crl_refresh_replaces_cached_data_and_retains_it_on_failure() {
++        use tokio::io::{AsyncReadExt, AsyncWriteExt};
++
++        let listener = tokio::net::TcpListener::bind("127.0.0.1:0").await.unwrap();
++        let url = format!("http://{}/crl", listener.local_addr().unwrap());
++        let server = tokio::spawn(async move {
++            for body in [Some("current"), Some("refreshed"), None] {
++                let (mut stream, _) = listener.accept().await.unwrap();
++                let mut request = [0; 4096];
++                stream.read(&mut request).await.unwrap();
++                let status = if body.is_some() {
++                    "200 OK"
++                } else {
++                    "503 Unavailable"
++                };
++                let body = body.unwrap_or("");
++                let response = format!(
++                    "HTTP/1.1 {status}\r\nContent-Length: {}\r\nConnection: close\r\n\r\n{body}",
++                    body.len()
++                );
++                stream.write_all(response.as_bytes()).await.unwrap();
++            }
++        });
++        let http = reqwest::Client::builder()
++            .timeout(Duration::from_secs(2))
++            .build()
++            .unwrap();
++        let initial = resolve_crl(&http, Some(b"expired".to_vec()), &url).await;
++        assert_eq!(initial.as_deref(), Some(b"current".as_slice()));
++        let refreshed = resolve_crl(&http, initial, &url).await;
++        assert_eq!(refreshed.as_deref(), Some(b"refreshed".as_slice()));
++        let retained = resolve_crl(&http, refreshed.clone(), &url).await;
++        assert_eq!(retained, refreshed);
++        server.await.unwrap();
++    }
++
+diff --git a/crates/vibecast-platform/src/manager.rs b/crates/vibecast-platform/src/manager.rs
+index b8dc6e9..f594f42 100644
+--- a/crates/vibecast-platform/src/manager.rs
++++ b/crates/vibecast-platform/src/manager.rs
+@@ -127,0 +128,3 @@ impl PlayerManager {
++        let mut crl_ticker = tokio::time::interval(Duration::from_secs(3600));
++        crl_ticker.set_missed_tick_behavior(tokio::time::MissedTickBehavior::Skip);
++        crl_ticker.tick().await;
+@@ -132,0 +136 @@ impl PlayerManager {
++                _ = crl_ticker.tick() => self.refresh_crl().await,
+@@ -253,0 +258,18 @@ impl PlayerManager {
++    async fn refresh_crl(&mut self) {
++        let crl =
++            super::resolve_crl(&self.config.http, self.config.crl.clone(), super::CRL_URL).await;
++        if crl == self.config.crl {
++            return;
++        }
++        self.config.crl = crl;
++        for tracked in self.receivers.values() {
++            tracked
++                .receiver
++                .rotation_handle()
++                .update_auth(AuthMaterial {
++                    bundle: self.bundle.clone(),
++                    crl: self.config.crl.clone(),
++                });
++        }
++    }
++
+@@ -269 +291 @@ impl PlayerManager {
+-        let crl = rotated.crl.clone().or_else(|| self.config.crl.clone());
++        let crl = self.config.crl.clone();

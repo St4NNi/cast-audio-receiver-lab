@@ -3,7 +3,10 @@
 ## Current dev23 maintained source
 
 Build commit `83ba470158189de3bc223701decdc4c502d47644` from
-`https://github.com/Allcrafter1/vibecast.git` directly. Exact input and fallback
+`https://github.com/Allcrafter1/vibecast.git`, then apply
+`patches/vibecast-crl-refresh.patch` once with `git apply --unidiff-zero`.
+The patch refreshes Cast revocation data hourly without restarting receivers.
+Exact input and fallback
 records are in `config/vibecast-frontend.lock.json`. Container and CI select this
 commit. The maintained/default branch is `cast-audio-receiver`; upstream `main`
 is retained for provenance, not the product build.
