@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.6.1.dev1
 
 - Refresh Cast revocation data hourly without restarting speakers. Retain the
   last downloaded list during network failures and across TLS certificate

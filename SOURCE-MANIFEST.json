@@ -1,9 +1,9 @@
 {
   "files": [
     {
-      "bytes": 96,
+      "bytes": 134,
       "path": ".dockerignore",
-      "sha256": "293d0104e0c8ef8190d4a83ff2c906dd17229fde5774d544d7738754588f3cf2"
+      "sha256": "1adeb7a1364ef2f1c8147972adeaa46ee6fdfd65f1b68d5538f03495a50e4375"
     },
     {
       "bytes": 1628,
@@ -26,14 +26,14 @@
       "sha256": "45159025691832219fd632180dc62e6899695e910fa2e2f42b124b43086ab22d"
     },
     {
-      "bytes": 4332,
+      "bytes": 4439,
       "path": ".github/workflows/ci.yml",
-      "sha256": "a15e8f627015ed042a450bb53edaa831ce73d017fdf630ed44f1afdb0760add5"
+      "sha256": "389b74253a837f198bbd9c2feba4e6cccbeabe9b2f4bf0630bc11d8c4d2f5c9b"
     },
     {
-      "bytes": 6663,
+      "bytes": 6678,
       "path": ".github/workflows/publish-image.yml",
-      "sha256": "1839c77ff602bccda1ebda36f8b5847446db996ec466889dd9d66adad412be28"
+      "sha256": "02e0c06c12d7587814744df11d310040454db550a9346eaf7397b3751257d4a6"
     },
     {
       "bytes": 2033,
@@ -46,9 +46,9 @@
       "sha256": "fc87dde535d4794a161022446ec381af47f48fa76e3dcdc69bc445529d9ef6a2"
     },
     {
-      "bytes": 2892,
+      "bytes": 3017,
       "path": ".github/workflows/source-review.yml",
-      "sha256": "f6866b6378df6b24bc48a475b84cf8c23d20ea760322b6844c4912abd4b0827e"
+      "sha256": "61a1fb08c92ac7544653a23167ffb99a29c755e831a9985466827ea4032aaaaa"
     },
     {
       "bytes": 2475,
@@ -61,9 +61,9 @@
       "sha256": "57d61edc4a7b995c3d99fdf77e29ee7b3252576491e697c682682051c96b054b"
     },
     {
-      "bytes": 46261,
+      "bytes": 47886,
       "path": "CHANGELOG.md",
-      "sha256": "1665d67258082786cf335aefd6235002cca00298dbc9e890ee3dec072db8eca0"
+      "sha256": "625a676ef16fb2c81032edbdcd15772283fe4e24074e05ccda8ae493090fc41c"
     },
     {
       "bytes": 3104,
@@ -71,9 +71,9 @@
       "sha256": "d582d78ea256d6623e963ad170fa360240e172cbfcc6650c2b72c7cf0b7146ad"
     },
     {
-      "bytes": 4736,
+      "bytes": 4937,
       "path": "Containerfile",
-      "sha256": "0bbafafde88c9ad1df46aa1d05f0e1198dbf0b91855a558317f69167f13c13b4"
+      "sha256": "7ae7ae84a9d2b8c36916f70a1008b38a3efafb3299be17662056e82668ace308"
     },
     {
       "bytes": 16726,
@@ -88,7 +88,7 @@
     {
       "bytes": 8682,
       "path": "README.md",
-      "sha256": "5eac277dec61acca31fa9624e8112ff9ebd0cde32f1cb1f96cd4fe8726b67c49"
+      "sha256": "e43aa9e2995a2e12110fe1b40d10279ed109097ac485ff13147a1458b8efca49"
     },
     {
       "bytes": 1140,
@@ -98,12 +98,12 @@
     {
       "bytes": 9861,
       "path": "THIRD_PARTY_NOTICES.md",
-      "sha256": "9c0c6da6d211bd12d675a57fb85f8c557e93923ab176bc255b753850422e561d"
+      "sha256": "d839271a81bf4d74da751e8aff93e21ba60e323f9abbbb452dffd2cbc42e7a8d"
     },
     {
-      "bytes": 5027,
+      "bytes": 6262,
       "path": "cast-audio-receiver/CHANGELOG.md",
-      "sha256": "2c2643b2da8c4fb484af66f604af62794673743a0a7655c8d9da4b8a4859a748"
+      "sha256": "f2d1f8156fcb78e0e93c633cbd7cd4bf0bb531e54c639b525212f524b8cac021"
     },
     {
       "bytes": 3138,
@@ -118,7 +118,7 @@
     {
       "bytes": 744,
       "path": "cast-audio-receiver/config.yaml",
-      "sha256": "ffdae2943d25978d657768f893a692bd33fc8a77ea63c247df4caaf9aecbf3cf"
+      "sha256": "7678ac3066ddf0bcf41c066c445c0668625a3269e77683be004fd91624104773"
     },
     {
       "bytes": 3957,
@@ -263,7 +263,7 @@
     {
       "bytes": 861,
       "path": "config/vibecast-frontend.lock.json",
-      "sha256": "51be134a407a4c29c780f472ef78e69e400cd886e11424604d0d2fa1ff26e709"
+      "sha256": "15cd3d4778425dbfb399f7c710c2426722e6036e203edd095491dd28baba429f"
     },
     {
       "bytes": 134,
@@ -296,9 +296,9 @@
       "sha256": "e23a00b7a392aa4b072905e707510d91a413a14b18b66761044f324f8cf4edac"
     },
     {
-      "bytes": 172654,
+      "bytes": 173595,
       "path": "docs/WORKING-PLAN.md",
-      "sha256": "9e151dcef1c1db302546c700729e650e81ec71e00252a31cdf228d60654567ab"
+      "sha256": "8f2c22a01ef68834b00848c18460748b61d14869040fd56505791e90563c4cf2"
     },
     {
       "bytes": 4535,
@@ -488,7 +488,7 @@
     {
       "bytes": 5552,
       "path": "docs/installation.md",
-      "sha256": "16e7ac016a47571b74e95e685530feb9cdb439fdc3ec26bd4c8ceec012a7ee10"
+      "sha256": "218a29519fed46716671c44ac04b8d5b686a79ecef7dcd76d16a5b7dd090e29c"
     },
     {
       "bytes": 4635,
@@ -508,7 +508,7 @@
     {
       "bytes": 14166,
       "path": "docs/maintenance.md",
-      "sha256": "561cfef04c7aa0241c6645582c5b75e411095ec195abc1689078d5395878fe8c"
+      "sha256": "685deaf05ac327168f91fa0b2630066e82b03e2537f8c8059b056f04d31a98ce"
     },
     {
       "bytes": 3148,
@@ -571,9 +571,9 @@
       "sha256": "a22b563e300012ee5778e6f95aadd1f88b049f6cb0212e38e2bd6cba5da15c01"
     },
     {
-      "bytes": 8997,
+      "bytes": 9152,
       "path": "docs/source-reconstruction.md",
-      "sha256": "0b41627995529775b08558405f2970add10e42369a30e9c27b70c85308056ada"
+      "sha256": "2477f6e7227a742ab4888f4555ff66ca11cc64a962289a280b75ee4d118fbe43"
     },
     {
       "bytes": 5071,
@@ -771,6 +771,11 @@
       "sha256": "15bc309c4dd4a8d381a6b4fa846fde1769f21becec21444e7760a749c82a19dd"
     },
     {
+      "bytes": 5152,
+      "path": "patches/vibecast-crl-refresh.patch",
+      "sha256": "4b603f97101ba73ec18bab87057c98a68c3513cc131c349e940dc86490c5d405"
+    },
+    {
       "bytes": 6822,
       "path": "patches/vibecast-dev13-internal-bridge.patch",
       "sha256": "660e536d026cb57681c3ea0534cb331ec91da8a75df08849d2f62819d74ed7c1"
@@ -816,9 +821,9 @@
       "sha256": "2394ffda1aeedb74c2730817dbe0e7b6dd991dd6551b3c1283fc7ca4554d7ec7"
     },
     {
-      "bytes": 1305,
+      "bytes": 1304,
       "path": "pyproject.toml",
-      "sha256": "d593d7f9608f22278acd4f4eb2cc6b9f68bce6c150fafcfd3ee7b2054b3eaefa"
+      "sha256": "2ec7deb1bf2c184535124067714ec1efdb68aee06718b131fa8c6218c20622fc"
     },
     {
       "bytes": 114,
@@ -881,9 +886,9 @@
       "sha256": "f24389fffe4b39fd1ab58dd98a229c950268b90403393197a61a85b8a2787727"
     },
     {
-      "bytes": 113,
+      "bytes": 112,
       "path": "src/cast_audio_lab/__init__.py",
-      "sha256": "a8fb012f99f9e54b8eb681a8873c142f8be92eb8931d6e9d712553046ec2755e"
+      "sha256": "fc54e9cdd804797d158b7a39222f7ee03bceec6d3a6ec3727954ed703b4645c8"
     },
     {
       "bytes": 153,
@@ -1136,9 +1141,9 @@
       "sha256": "8fa6b426ffdba37f5a7d61e72b7143fda7862c719a23270822058868e440be9d"
     },
     {
-      "bytes": 1760,
+      "bytes": 1844,
       "path": "tests/test_ha_test_repository.py",
-      "sha256": "6d43ea1a31e7fd493d4cb9721b879e109bcaf33f3b5f989bea17d2fc305abb8f"
+      "sha256": "cf44bd57d2f24ac29e21ab5bdb692512fbd0b920459ccc9ba9fe8620e5b3d1a3"
     },
     {
       "bytes": 7368,
@@ -1201,14 +1206,14 @@
       "sha256": "d3cdbb3bbfd068b576097f43d73c2d678ccae6f1c0d7bb831142add33d257690"
     },
     {
-      "bytes": 9053,
+      "bytes": 9967,
       "path": "tests/test_release_automation.py",
-      "sha256": "fccc1bbbce362b8f12804b2630c450abc2d18d5cc1c0eb90c00d67cba18d38ed"
+      "sha256": "4682936ded775426e47354332229acc76c8e0e12bb7a3d6d4a60be7fa5ce53c9"
     },
     {
-      "bytes": 4350,
+      "bytes": 4671,
       "path": "tests/test_release_records.py",
-      "sha256": "e7d554d3a1345e1a138787d44e9be0cbb90aeb95f390c47b1aa20eac894a1ebc"
+      "sha256": "074fa0df78bcc896ec2a07379b8736ebf499a8a1c507de6a4207bb26fd890d80"
     },
     {
       "bytes": 1385,
@@ -1341,9 +1346,9 @@
       "sha256": "9629008d429bdad2f282d588a4313de11752d4ad16652eb3cea9800c18d3b6ad"
     },
     {
-      "bytes": 2235,
+      "bytes": 2277,
       "path": "tools/create_ha_test_repository.py",
-      "sha256": "7feda8e58079027b8834eea9fff32872c144fb58e1a81bf5967b45f5596e3d1b"
+      "sha256": "5aa24cc8c9369d2c5005f89ff3edcc2d668d2457a3ec8e40c53470b5069a0a0c"
     },
     {
       "bytes": 6021,
@@ -1431,9 +1436,9 @@
       "sha256": "9fbb796979b79be310c4dc5bda24c18c7ef3c47da74aa259b77e7fd34ddb5c21"
     },
     {
-      "bytes": 11829,
+      "bytes": 12270,
       "path": "tools/release.py",
-      "sha256": "17a4e3c88d8c6d97eb0d88b76ba3bb1dde5624db133cc867b8097d93bc539d3c"
+      "sha256": "c24192f79c2254acefd00797d6e4d21a83151a695e09fcbf5936cfd0be823bd1"
     },
     {
       "bytes": 705,

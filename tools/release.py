@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import base64
 import hashlib
 import json
 import os
@@ -17,8 +18,8 @@ import urllib.error
 import urllib.request
 
 ROOT = Path(__file__).resolve().parents[1]
-REPO = 'Allcrafter1/cast-audio-receiver-lab'
-IMAGE = 'ghcr.io/allcrafter1/cast-audio-receiver'
+REPO = 'St4NNi/cast-audio-receiver-lab'
+IMAGE = 'ghcr.io/st4nni/cast-audio-receiver'
 
 
 def run(*args):
@@ -70,13 +71,19 @@ def prepare(version, root=ROOT):
 
 
 class Registry:
-    def __init__(self):
-        url = 'https://ghcr.io/token?service=ghcr.io&scope=repository:allcrafter1/cast-audio-receiver:pull'
-        with urllib.request.urlopen(url, timeout=30) as response:
+    def __init__(self, *, authenticated=False):
+        access = 'pull,push' if authenticated else 'pull'
+        request = urllib.request.Request(
+            'https://ghcr.io/token?service=ghcr.io&scope=repository:st4nni/cast-audio-receiver:' + access)
+        if authenticated and (token := os.environ.get('GH_TOKEN')):
+            actor = os.environ.get('GITHUB_ACTOR') or REPO.split('/')[0]
+            credentials = base64.b64encode((actor + ':' + token).encode()).decode()
+            request.add_header('Authorization', 'Basic ' + credentials)
+        with urllib.request.urlopen(request, timeout=30) as response:
             self.token = json.load(response)['token']
 
     def get(self, path, expected=None):
-        request = urllib.request.Request('https://ghcr.io/v2/allcrafter1/cast-audio-receiver/' + path,
+        request = urllib.request.Request('https://ghcr.io/v2/st4nni/cast-audio-receiver/' + path,
             headers={'Authorization': 'Bearer ' + self.token,
                      'Accept': 'application/vnd.oci.image.index.v1+json, application/vnd.oci.image.manifest.v1+json'})
         with urllib.request.urlopen(request, timeout=60) as response:
@@ -120,7 +127,7 @@ def guard(tag, sha):
     if run('git', 'ls-remote', 'origin', 'refs/tags/v' + tag):
         raise ValueError('Release tag already exists; never overwrite a release')
     try:
-        Registry().get('manifests/' + tag)
+        Registry(authenticated=True).get('manifests/' + tag)
     except urllib.error.HTTPError as error:
         if error.code != 404:
             raise

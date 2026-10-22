@@ -1,5 +1,12 @@
 # App changelog
 
+## 0.6.1-dev1
+
+- Refresh Cast revocation data hourly without restarting speakers or playback.
+- Retain previous trust data during download failures and TLS certificate rotation.
+- Publish the focused CRL fix from the St4NNi fork, preserving speaker identities
+  and the existing dev26 playback behavior.
+
 ## 0.6.0-dev26 — reliable desktop/mobile takeover and playback fallback
 
 - A new YouTube Music controller now takes over exclusively and disconnects the

@@ -14,6 +14,18 @@ from tools import release
 
 
 class ReleaseAutomationTests(unittest.TestCase):
+    def test_registry_authentication_is_explicit_and_public_readback_stays_anonymous(self):
+        for authenticated in [False, True]:
+            with self.subTest(authenticated=authenticated):
+                response = io.BytesIO(b'{"token":"synthetic-registry-token"}')
+                with patch.dict(release.os.environ, {'GH_TOKEN':'synthetic-token', 'GITHUB_ACTOR':'fixture'}), patch.object(release.urllib.request, 'urlopen', return_value=response) as opener:
+                    registry = release.Registry(authenticated=authenticated)
+                request = opener.call_args.args[0]
+                self.assertEqual(registry.token, 'synthetic-registry-token')
+                self.assertEqual(request.has_header('Authorization'), authenticated)
+                if authenticated:
+                    self.assertEqual(request.get_header('Authorization'), 'Basic Zml4dHVyZTpzeW50aGV0aWMtdG9rZW4=')
+
     def test_version_conversion_rejects_shell_and_stable_inputs(self):
         self.assertEqual(release.image_tag('0.6.0.dev21'), '0.6.0-dev21')
         for bad in ['0.6.0', '0.6.0-dev21', '0.6.0.dev21;echo', '../dev21']:
@@ -96,7 +108,7 @@ class ReleaseAutomationTests(unittest.TestCase):
 
     def test_guard_only_treats_404_as_missing_image(self):
         sha = 'a' * 40
-        for code in [404, 401, 500]:
+        for code in [404, 401, 403, 500]:
             registry = Mock()
             registry.get.side_effect = urllib.error.HTTPError('registry', code, 'failure', {}, None)
             with patch.object(release, 'run', side_effect=[sha, sha + '\trefs/heads/main', '']), patch.object(release, 'Registry', return_value=registry):
