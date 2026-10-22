@@ -1,8 +1,8 @@
 name: Cast Audio Receiver Lab
-version: "0.6.0-dev26"
+version: "0.6.1-dev1"
 slug: cast_audio_receiver
 description: Experimental audio-only Cast receiver with modular outputs
-url: https://github.com/Allcrafter1/cast-audio-receiver-lab
+url: https://github.com/St4NNi/cast-audio-receiver-lab
 arch:
   - amd64
   - aarch64
@@ -30,4 +30,4 @@ schema:
 map:
   - type: share
     read_only: true
-image: ghcr.io/allcrafter1/cast-audio-receiver
+image: ghcr.io/st4nni/cast-audio-receiver

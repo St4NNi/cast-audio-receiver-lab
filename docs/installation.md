@@ -24,13 +24,13 @@ revocation or a protocol change can invalidate it earlier.
 
 ## Home Assistant App
 
-[![Add the Cast Audio Receiver repository to Home Assistant](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2FAllcrafter1%2Fcast-audio-receiver-lab)
+[![Add the Cast Audio Receiver repository to Home Assistant](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2FSt4NNi%2Fcast-audio-receiver-lab)
 
 In Home Assistant, open **Settings → Apps → App store → Repositories**, add
-`https://github.com/Allcrafter1/cast-audio-receiver-lab`, refresh the store and
+`https://github.com/St4NNi/cast-audio-receiver-lab`, refresh the store and
 install **Cast Audio Receiver Lab**. This release supports `amd64` and `aarch64`
 (64-bit ARM), not 32-bit ARM. To update an existing installation, refresh the
-store, choose version **0.6.0-dev26**, and retain the App backup option.
+store, choose version **0.6.1-dev1**, and retain the App backup option.
 
 The source package under `cast-audio-receiver/` has passed a real HAOS/
 Supervisor source build, install, ingress, LAN, local-audio restart and
@@ -75,7 +75,7 @@ private state before permanently dropping to UID/GID 1000:
 docker run --rm --network host \
   -v /absolute/cast-audio-state:/data \
   -e CAST_AUDIO_WEB_PORT=8788 \
-  ghcr.io/allcrafter1/cast-audio-receiver:0.6.0-dev26
+  ghcr.io/st4nni/cast-audio-receiver:0.6.1-dev1
 ```
 
 For BYO material, additionally mount the file read-only and set

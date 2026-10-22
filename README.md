@@ -17,13 +17,13 @@ App with one small management interface.
 
 ## Install in Home Assistant
 
-[![Add the Cast Audio Receiver repository to Home Assistant](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2FAllcrafter1%2Fcast-audio-receiver-lab)
+[![Add the Cast Audio Receiver repository to Home Assistant](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2FSt4NNi%2Fcast-audio-receiver-lab)
 
 If the button does not open your instance, add this repository manually under
 **Settings → Apps → App store → Repositories**:
 
 ```text
-https://github.com/Allcrafter1/cast-audio-receiver-lab
+https://github.com/St4NNi/cast-audio-receiver-lab
 ```
 
 Install **Cast Audio Receiver Lab**, start it and select **Open Web UI**. The
@@ -124,7 +124,7 @@ the authentication section in [How it works](docs/how-it-works.md).
 The published multiarch (`amd64` / `arm64`) image is:
 
 ```text
-ghcr.io/allcrafter1/cast-audio-receiver:0.6.0-dev26
+ghcr.io/st4nni/cast-audio-receiver:0.6.1-dev1
 ```
 
 It needs host networking for Cast/mDNS and target discovery, plus persistent

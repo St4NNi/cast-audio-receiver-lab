@@ -86,9 +86,9 @@
       "sha256": "2e5f17fdff2875a5d2fca177e7903af71c0b9a6a687e26ed4435c30329218908"
     },
     {
-      "bytes": 8682,
+      "bytes": 8666,
       "path": "README.md",
-      "sha256": "e43aa9e2995a2e12110fe1b40d10279ed109097ac485ff13147a1458b8efca49"
+      "sha256": "1745d7728188ec4bc8010529274cb75d604a0bb3ea215d5a205a0ce529837318"
     },
     {
       "bytes": 1140,
@@ -116,9 +116,9 @@
       "sha256": "781fe6fa26ff0f90a6ad23f4c768d121577a62c7328a4108af3a130e183ce364"
     },
     {
-      "bytes": 744,
+      "bytes": 733,
       "path": "cast-audio-receiver/config.yaml",
-      "sha256": "7678ac3066ddf0bcf41c066c445c0668625a3269e77683be004fd91624104773"
+      "sha256": "e7a70dc4aeddf67ecfc138aa1eaff0b00eb6135295cb4ac8783f2ded2eb74053"
     },
     {
       "bytes": 3957,
@@ -486,9 +486,9 @@
       "sha256": "1467273611d5349ef4515df756bbb447b68c8139387690b29f885afc266b088e"
     },
     {
-      "bytes": 5552,
+      "bytes": 5535,
       "path": "docs/installation.md",
-      "sha256": "218a29519fed46716671c44ac04b8d5b686a79ecef7dcd76d16a5b7dd090e29c"
+      "sha256": "a1bb0ddadb60276c06091e977769fddd48aa40fb350033d20eb0a1b6d606d6f1"
     },
     {
       "bytes": 4635,
@@ -826,9 +826,9 @@
       "sha256": "2ec7deb1bf2c184535124067714ec1efdb68aee06718b131fa8c6218c20622fc"
     },
     {
-      "bytes": 114,
+      "bytes": 109,
       "path": "repository.yaml",
-      "sha256": "46d9c3e46331316a9ba27e8301366c32c8b515ceafed86ec46de60954fe700cf"
+      "sha256": "8b4678f2a1ca637fb5a646697e2058e19c2566e4beb82ee046b6128f4f3721a3"
     },
     {
       "bytes": 1085,
