@@ -4,6 +4,7 @@ import hashlib
 from html.parser import HTMLParser
 import json
 from pathlib import Path
+import re
 import unittest
 
 ROOT = Path(__file__).parents[1]
@@ -63,7 +64,9 @@ class ReviewPackagingTests(unittest.TestCase):
         for path in ["Containerfile", ".github/workflows/ci.yml"]:
             text = (ROOT / path).read_text()
             self.assertIn(current["commit"], text)
-            self.assertNotIn("git apply", text)
+            patches = {Path(value).name for value in re.findall(r"[\w./-]+\.patch", text)}
+            self.assertEqual(patches, {Path(current["local_patch"]).name})
+            self.assertNotIn(current["reconstruction_overlay"], text)
 
     def test_airplay_asset_and_container_pin_match(self):
         lock = json.loads((ROOT / "config/cliairplay-linux-x86_64.lock.json").read_text())
