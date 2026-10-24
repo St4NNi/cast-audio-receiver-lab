@@ -103,3 +103,89 @@ index b8dc6e9..f594f42 100644
 @@ -269 +291 @@ impl PlayerManager {
 -        let crl = rotated.crl.clone().or_else(|| self.config.crl.clone());
 +        let crl = self.config.crl.clone();
+diff --git a/crates/vibecast-security/src/tls.rs b/crates/vibecast-security/src/tls.rs
+--- a/crates/vibecast-security/src/tls.rs
++++ b/crates/vibecast-security/src/tls.rs
+@@ -56 +56 @@
+-    let config = ServerConfig::builder_with_provider(provider)
++    let mut config = ServerConfig::builder_with_provider(provider)
+@@ -60,0 +61 @@
++    config.session_storage = Arc::new(rustls::server::NoServerSessionStorage {});
+diff --git a/crates/vibecast-security/src/tests.rs b/crates/vibecast-security/src/tests.rs
+--- a/crates/vibecast-security/src/tests.rs
++++ b/crates/vibecast-security/src/tests.rs
+@@ -197,0 +198,74 @@
++fn tls_reconnect_after_rotation_uses_current_certificate() {
++    use std::sync::Arc;
++
++    let (dev, _, _) = cert("Device", (2000, 1, 1), (2099, 1, 1));
++    let (ica, _, _) = cert("ICA", (2000, 1, 1), (2099, 1, 1));
++    let (a, ak, ader) = cert("cast.test", (2000, 1, 1), (2099, 1, 1));
++    let (b, bk, bder) = cert("cast.test", (2000, 1, 1), (2099, 1, 1));
++    let a = CertificateStore::from_manifest_str(&manifest(
++        &dev,
++        &ica,
++        &[(a, ak, vec![1], vec![2])],
++        None,
++    ))
++    .unwrap();
++    let b = CertificateStore::from_manifest_str(&manifest(
++        &dev,
++        &ica,
++        &[(b, bk, vec![3], vec![4])],
++        None,
++    ))
++    .unwrap();
++
++    for version in [&rustls::version::TLS12, &rustls::version::TLS13] {
++        let resolver = CertResolver::new(a.active_bundle()).unwrap();
++        let server = Arc::new(server_config(resolver.clone()).unwrap());
++        let mut roots = rustls::RootCertStore::empty();
++        roots.add(ader.clone().into()).unwrap();
++        roots.add(bder.clone().into()).unwrap();
++        let client = Arc::new(
++            rustls::ClientConfig::builder_with_provider(Arc::new(
++                rustls::crypto::aws_lc_rs::default_provider(),
++            ))
++            .with_protocol_versions(&[version])
++            .unwrap()
++            .with_root_certificates(roots)
++            .with_no_client_auth(),
++        );
++        let connect = || {
++            let mut client =
++                rustls::ClientConnection::new(client.clone(), "cast.test".try_into().unwrap())
++                    .unwrap();
++            let mut server = rustls::ServerConnection::new(server.clone()).unwrap();
++            for _ in 0..10 {
++                let mut wire = Vec::new();
++                while client.wants_write() {
++                    client.write_tls(&mut wire).unwrap();
++                }
++                server.read_tls(&mut std::io::Cursor::new(wire)).unwrap();
++                server.process_new_packets().unwrap();
++                let mut wire = Vec::new();
++                while server.wants_write() {
++                    server.write_tls(&mut wire).unwrap();
++                }
++                client.read_tls(&mut std::io::Cursor::new(wire)).unwrap();
++                client.process_new_packets().unwrap();
++                if !client.is_handshaking() && !server.is_handshaking() && !client.wants_write() {
++                    return client;
++                }
++            }
++            panic!("TLS handshake did not complete");
++        };
++
++        assert_eq!(connect().peer_certificates().unwrap()[0].as_ref(), ader);
++        resolver.update(b.active_bundle()).unwrap();
++        let reconnected = connect();
++        assert_eq!(reconnected.peer_certificates().unwrap()[0].as_ref(), bder);
++        assert_eq!(
++            reconnected.handshake_kind(),
++            Some(rustls::HandshakeKind::Full)
++        );
++    }
++}
++
++#[test]

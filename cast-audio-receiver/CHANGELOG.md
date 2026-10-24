@@ -1,5 +1,10 @@
 # App changelog
 
+## 0.6.1-dev2
+
+- Fix pairing hangs after certificate rotation by disabling saved TLS sessions.
+- Preserve the hourly trust-data refresh, speaker identities and saved settings.
+
 ## 0.6.1-dev1
 
 - Refresh Cast revocation data hourly without restarting speakers or playback.

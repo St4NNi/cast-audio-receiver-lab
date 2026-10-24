@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.6.1.dev2
+
+- Disable TLS session reuse so Cast authentication uses the current certificate
+  after rotation, preventing reconnects from hanging during pairing.
+- Cover reconnects after rotation under TLS 1.2 and TLS 1.3.
+
 ## 0.6.1.dev1
 
 - Refresh Cast revocation data hourly without restarting speakers. Retain the

@@ -6,7 +6,7 @@
   "reconstruction_base": "f28befe02fe930db300294d6bf49cdf5fec5a747",
   "reconstruction_overlay": "patches/vibecast-dev13-internal-bridge.patch",
   "reconstruction_overlay_sha256": "660e536d026cb57681c3ea0534cb331ec91da8a75df08849d2f62819d74ed7c1",
-  "note": "Build the pinned commit and apply local_patch exactly once. It refreshes Cast revocation data hourly, retains previous data on fetch failure and preserves refreshed data across TLS rotation. Historical reconstruction snapshots must not be applied on top.",
+  "note": "Build the pinned commit and apply local_patch exactly once. It refreshes Cast revocation data hourly, retains previous data on fetch failure and preserves refreshed data across TLS rotation. TLS session reuse is disabled so authentication matches the current connection certificate after rotation. Historical reconstruction snapshots must not be applied on top.",
   "local_patch": "patches/vibecast-crl-refresh.patch",
-  "local_patch_sha256": "4b603f97101ba73ec18bab87057c98a68c3513cc131c349e940dc86490c5d405"
+  "local_patch_sha256": "b6d3b430eae51b66088d08709b428326fcbd2f5e4f73c53ddbd3165e1c8cc932"
 }

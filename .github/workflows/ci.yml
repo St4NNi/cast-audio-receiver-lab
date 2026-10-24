@@ -69,6 +69,7 @@ jobs:
           -p vibecast-apps-youtube
           -p vibecast-bridge
           -p vibecast-platform
+          -p vibecast-security
           -p vibecast-core
           -p vibecast-player-api
           -p vibecast-sdk
