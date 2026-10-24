@@ -40,7 +40,7 @@ class DocumentationTests(unittest.TestCase):
             self.assertIn(f"badges/{current}.svg", text)
             self.assertIn(f"redirect/{current}/", text)
             self.assertNotIn(obsolete, text)
-            self.assertIn("repository_url=https%3A%2F%2Fgithub.com%2FAllcrafter1%2Fcast-audio-receiver-lab", text)
+            self.assertIn("repository_url=https%3A%2F%2Fgithub.com%2FSt4NNi%2Fcast-audio-receiver-lab", text)
 
     def test_readme_exposes_default_management_address(self) -> None:
         readme = (ROOT / "README.md").read_text(encoding="utf-8")
